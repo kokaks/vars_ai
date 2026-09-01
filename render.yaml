@@ -1,0 +1,24 @@
+# Render Blueprint — deploy with "New +" -> "Blueprint" in the Render
+# dashboard, pointing at this repo. Render will read this file and create
+# the service below automatically. You still set the secret env vars
+# (DATABASE_URL, VAPID keys) yourself in the dashboard after — see
+# docs/deployment-render-neon.md for the full walkthrough.
+
+services:
+  - type: web
+    name: barbershop-ai-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.1
+      - key: DATABASE_URL
+        sync: false          # set manually from your Neon connection string
+      - key: VAPID_PUBLIC_KEY
+        sync: false          # set manually — see docs/deployment-render-neon.md
+      - key: VAPID_PRIVATE_KEY
+        sync: false

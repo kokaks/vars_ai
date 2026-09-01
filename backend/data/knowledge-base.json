@@ -1,0 +1,53 @@
+{
+  "_comment": "This file is the single source of truth for shop facts. seed.js loads it into the DB. The backend also serves a live-rendered version of this (from the DB, not this static file) to the ElevenLabs agent on every call, so edits made in the PWA settings are always what the agent sees — this JSON is only the INITIAL seed.",
+
+  "shop": {
+    "name": "Barbershop Yerevan",
+    "timezone": "Asia/Yerevan",
+    "address": "Example: 14 Mashtots Ave, Yerevan",
+    "phone_number": "+374XXXXXXXX",
+    "languages": ["hy", "ru", "en"]
+  },
+
+  "guardrails": {
+    "min_cancel_notice_minutes": 120,
+    "cancel_transfer_threshold_minutes": 10,
+    "default_reminder_lead_minutes": 15,
+    "default_buffer_minutes": 10,
+    "max_reschedules_before_flag": 3
+  },
+
+  "services": [
+    { "name": "Haircut", "name_hy": "Սանրվածք", "name_ru": "Стрижка", "duration_minutes": 45, "price_amd": 5000 },
+    { "name": "Beard Trim", "name_hy": "Մորուքի կարգավորում", "name_ru": "Стрижка бороды", "duration_minutes": 30, "price_amd": 3000 },
+    { "name": "Haircut + Beard Trim", "name_hy": "Սանրվածք + մորուք", "name_ru": "Стрижка + борода", "duration_minutes": 60, "price_amd": 7000 },
+    { "name": "Hair Wash", "name_hy": "Լվացում", "name_ru": "Мытьё головы", "duration_minutes": 15, "price_amd": 1500 },
+    { "name": "Kids Haircut", "name_hy": "Մանկական սանրվածք", "name_ru": "Детская стрижка", "duration_minutes": 30, "price_amd": 3500 }
+  ],
+
+  "barbers": [
+    {
+      "name": "Narek",
+      "phone_number": "+374XXXXXXXX",
+      "hours": [
+        { "weekday": 1, "start": "10:00", "end": "19:00" },
+        { "weekday": 2, "start": "10:00", "end": "19:00" },
+        { "weekday": 3, "start": "10:00", "end": "19:00" },
+        { "weekday": 4, "start": "10:00", "end": "19:00" },
+        { "weekday": 5, "start": "10:00", "end": "19:00" },
+        { "weekday": 6, "start": "11:00", "end": "17:00" }
+      ],
+      "breaks": [
+        { "weekday": null, "start": "13:00", "end": "14:00", "label": "Lunch" }
+      ],
+      "buffer_minutes": 10
+    }
+  ],
+
+  "notes_for_agent": [
+    "Weekday 0 = Sunday, shop closed unless a barber explicitly has Sunday hours.",
+    "Always confirm date AND time AND service AND barber (or 'any barber') before finalizing a booking.",
+    "If the caller does not specify a barber and more than one is active, offer the earliest available slot across all barbers unless the caller has a booking history with a specific barber — in that case offer that barber first.",
+    "All times spoken by the caller are assumed to be shop-local time (Asia/Yerevan) unless the caller is calling from a context that states otherwise."
+  ]
+}
