@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#151515" />
+  <title>Barbershop</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div>
+      <span class="date" id="todayDate">Today</span>
+      <span class="subtitle" id="barberName">Loading…</span>
+    </div>
+    <button class="icon-btn" id="settingsBtn" aria-label="Settings">⚙</button>
+  </header>
+
+  <div class="day-tabs" id="dayTabs"></div>
+
+  <div id="nextUp" class="next-up empty">Loading today's schedule…</div>
+
+  <div class="section-label" id="listLabel">Today</div>
+  <div class="appt-list" id="apptList"></div>
+
+  <button class="fab" id="walkinBtn">＋ Walk-in</button>
+
+  <!-- Walk-in sheet -->
+  <div class="sheet-backdrop" id="walkinBackdrop">
+    <div class="sheet">
+      <h2>Add Walk-in</h2>
+      <div class="row">
+        <label for="walkinName">Name (optional)</label>
+        <input id="walkinName" placeholder="Walk-in" />
+      </div>
+      <div class="row">
+        <label for="walkinService">Service</label>
+        <select id="walkinService"></select>
+      </div>
+      <button class="primary-btn" id="walkinConfirm">Start now</button>
+      <button class="cancel-link" data-close="walkinBackdrop">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Appointment detail sheet -->
+  <div class="sheet-backdrop" id="detailBackdrop">
+    <div class="sheet" id="detailSheet"></div>
+  </div>
+
+  <!-- Settings sheet -->
+  <div class="sheet-backdrop" id="settingsBackdrop">
+    <div class="sheet">
+      <h2>Settings</h2>
+      <div class="row">
+        <label for="bufferInput">Buffer between appointments (min)</label>
+        <input id="bufferInput" type="number" min="0" step="5" />
+      </div>
+      <div class="row">
+        <label for="reminderInput">Reminder lead time (min before)</label>
+        <input id="reminderInput" type="number" min="0" step="5" />
+      </div>
+      <div class="row">
+        <label>Push notifications</label>
+        <button class="primary-btn" id="enablePushBtn" type="button">Enable reminders on this device</button>
+      </div>
+      <button class="primary-btn" id="saveSettingsBtn">Save</button>
+      <button class="cancel-link" data-close="settingsBackdrop">Close</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

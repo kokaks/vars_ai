@@ -1,0 +1,6 @@
+node_modules/
+.env
+*.log
+.DS_Store
+backend/db/barbershop.db
+backend/db/barbershop.db-*
